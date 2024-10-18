@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Tags from "@yaireo/tagify/dist/react.tagify";
+// import Tags from "@yaireo/tagify/dist/react.tagify";
 import { formTemplates } from "./InboxData";
 import { Icon, Button, TooltipComponent } from "../../../components/Component";
 import { Modal, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from "reactstrap";

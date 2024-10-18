@@ -37,15 +37,15 @@ export const CodeBlock = ({ language, ...props }) => {
   };
   return (
     <div className={`code-block code-block-clean ${copyState ? "clipboard-success" : ""}`}>
-      <OverlineTitle className="title">{props.title ? props.title : "Code Example"}</OverlineTitle>
-      <CopyToClipboard text={copyText} onCopy={onCopyClick}>
-        <Button color="blank" size="sm" className="clipboard-init">
-          {copyState ? "Copied" : "Copy"}
-        </Button>
-      </CopyToClipboard>
-      <SyntaxHighlighter language="javascript" className="bg-lighter h-max-150px m-0" style={a11yLight}>
-        {props.children}
-      </SyntaxHighlighter>
+        <OverlineTitle className="title">{props.title ? props.title : "Code Example"}</OverlineTitle>
+        <CopyToClipboard text={copyText} onCopy={onCopyClick}>
+            <Button color="blank" size="sm" className="clipboard-init">
+            {copyState ? "Copied" : "Copy"}
+            </Button>
+        </CopyToClipboard>
+        <SyntaxHighlighter language="javascript" className="bg-lighter h-max-150px m-0" style={a11yLight}>
+            {props.children}
+        </SyntaxHighlighter>
     </div>
   );
 };

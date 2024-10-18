@@ -5,17 +5,19 @@ import "./assets/scss/style-email.scss";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import {Provider} from 'react-redux';
+import { store } from "./redux/store";
 
 const Error404Modern = lazy(() => import("./pages/error/404-modern"));
 
 ReactDOM.render(
-  <React.Fragment>
+  <Provider store={store}>
     <Suspense fallback={<div />}>
       <Router basename={`/`}>
         <Route render={({ location }) => (location.state && location.state.is404 ? <Error404Modern /> : <App />)} />
       </Router>
     </Suspense>
-  </React.Fragment>,
+  </Provider>,
   document.getElementById("root")
 );
 

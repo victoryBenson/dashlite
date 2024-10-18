@@ -78,7 +78,7 @@ const Register = ({ history }) => {
                     name="email"
                     ref={register({ required: true })}
                     className="form-control-lg form-control"
-                    placeholder="Enter your email address or username"
+                    placeholder="Enter your email address"
                   />
                   {errors.email && <p className="invalid">This field is required</p>}
                 </div>

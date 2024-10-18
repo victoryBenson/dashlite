@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import InboxMessageHeader from "./InboxMessageHeader";
 import SimpleBar from "simplebar-react";
 import InboxReplyItem from "./InboxReply";
-import Tags from "@yaireo/tagify/dist/react.tagify";
+// import Tags from "@yaireo/tagify/dist/react.tagify";
 import { contacts, formTemplates } from "./InboxData";
 import { Button, Icon, TooltipComponent } from "../../../components/Component";
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
