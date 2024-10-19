@@ -1,13 +1,11 @@
 import axios from 'axios'
 
 
-//register
+//login
 const login = async(userData) => {
-    const response = await axios.post('https://api.myartstocks.com/login', userData)
-    sessionStorage.setItem('token', response.token);
+    const response = await axios.post('https://staging.pekadis.com/api/login', userData)
     return response.data
 };
-
 
 
 const authService = {
@@ -15,3 +13,6 @@ const authService = {
 };
 
 export default authService;
+
+
+// https://staging.pekadis.com/api

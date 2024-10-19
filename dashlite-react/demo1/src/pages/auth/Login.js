@@ -15,7 +15,6 @@ import {
   PreviewCard,
 } from "../../components/Component";
 import { Form, FormGroup, Spinner, Alert } from "reactstrap";
-// import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { login } from "../../redux/features/auth/authSlide";
 import {useDispatch, useSelector} from 'react-redux'
@@ -29,18 +28,24 @@ const initialState = {
 
 const Login = () => {
   const dispatch = useDispatch();
-  const {isLoading, isAuthenticated, isError} = useSelector((state)=> state.auth)
+  const {isLoading, isError} = useSelector((state)=> state.auth)
   const [formState, setFormState] = useState(initialState)
+  const [viewPwd, setViewPwd] = useState(false)
 
+
+
+  const togglePwdVisibility = () => {
+    setViewPwd(!viewPwd)
+  };
 
   const handleChange = (e) => {
     const {name, value} = e.target;
     setFormState({...formState, [name]: value})
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await dispatch(login(formState))
+    dispatch(login(formState)) 
   };
 
 
@@ -61,14 +66,14 @@ const Login = () => {
               <BlockContent>
                 <BlockTitle tag="h4">Sign-In</BlockTitle>
                 <BlockDes>
-                    <p>Access Dashlite using your email and passcode.</p>
+                    <p>Access Dashlite using your email and password.</p>
                 </BlockDes>
               </BlockContent>
             </BlockHead>
             {isError && (
                 <div className="mb-3">
                     <Alert color="danger" className="alert-icon">
-                        {" "}
+                        {isError}
                         <Icon name="alert-circle" /> Unable to login with credentials{" "}
                     </Alert>
                 </div>
@@ -96,33 +101,32 @@ const Login = () => {
                 <FormGroup>
                     <div className="form-label-group">
                     <label className="form-label" htmlFor="password">
-                        Passcode
+                        Password
                     </label>
                     <Link className="link link-primary link-sm" to={`${process.env.PUBLIC_URL}/auth-reset`}>
                         Forgot Code?
                     </Link>
                     </div>
                     <div className="form-control-wrap">
-                        {/* <a
+                        <a
                             href="#password"
                             onClick={(ev) => {
                             ev.preventDefault();
-                            setPassState(!passState);
+                            togglePwdVisibility()
                             }}
-                            className={`form-icon lg form-icon-right passcode-switch ${passState ? "is-hidden" : "is-shown"}`}
+                            className={`form-icon lg form-icon-right passcode-switch ${viewPwd ? "is-hidden" : "is-shown"}`}
                         >
                             <Icon name="eye" className="passcode-icon icon-show"></Icon>
 
                             <Icon name="eye-off" className="passcode-icon icon-hide"></Icon>
-                        </a> */}
+                        </a>
                         <input
-                            type="password"
+                            type={viewPwd? 'text' : "password"}
                             name="password"
                             value={formState.password}
                             required
                             placeholder="Enter your password"
-                            // className={`form-control-lg form-control ${password ? "is-hidden" : "is-shown"}`}
-                            className="form-control-lg form-control"
+                            className={`form-control-lg form-control ${viewPwd ? "is-hidden" : "is-shown"}`}
                             onChange={handleChange}
                         />
                     </div>
