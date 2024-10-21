@@ -24,7 +24,6 @@ export const login = createAsyncThunk(
             ) ||
             error.message || 
             error.toString();
-            console.log(error.message)
             return thunkAPI.rejectWithValue(message);
         }
     }
@@ -54,13 +53,17 @@ const userSlice = createSlice({
         })
         .addCase(login.fulfilled, (state, action) => {
             state.isLoading = false;
+            state.isAuthenticated = true;
             state.user = action.payload.user;
-            state.token = action.payload.token;
+            state.token = action.payload.token
             console.log(action.payload)
+            console.log(`${state.token}`)
         })
         .addCase(login.rejected, (state, action) => {
             state.isLoading = false;
-            state.isError = action.payload.message;
+            state.isAuthenticated = false
+            state.isError = action.payload;
+            state.token = ""
             console.log(action.payload)
         })
     }

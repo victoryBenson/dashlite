@@ -18,7 +18,7 @@ import { Form, FormGroup, Spinner, Alert } from "reactstrap";
 import { Link } from "react-router-dom";
 import { login } from "../../redux/features/auth/authSlide";
 import {useDispatch, useSelector} from 'react-redux'
-
+import { Redirect, useLocation} from 'react-router-dom'
 
 const initialState = {
     email: "",
@@ -28,9 +28,11 @@ const initialState = {
 
 const Login = () => {
   const dispatch = useDispatch();
-  const {isLoading, isError} = useSelector((state)=> state.auth)
+  const {isLoading, isError, isAuthenticated} = useSelector((state)=> state.auth)
   const [formState, setFormState] = useState(initialState)
   const [viewPwd, setViewPwd] = useState(false)
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/demo1" } };
 
 
 
@@ -42,11 +44,17 @@ const Login = () => {
     const {name, value} = e.target;
     setFormState({...formState, [name]: value})
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login(formState)) 
   };
+
+
+  if (isAuthenticated) {
+    return <Redirect to={from} />;
+  }
 
 
   return (
